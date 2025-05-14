@@ -164,3 +164,29 @@ function resetLevel() {
 }
 
 window.onload = () => loadLevel(0);
+
+document.getElementById('startButton').addEventListener('click', function() {
+  function startTimer() {
+    let timer;
+    let seconds = 0;
+    let timeDisplay = document.getElementById('timeDisplay');
+    
+    timer = setInterval(function() {
+        seconds++;
+        let minutes = Math.floor(seconds / 60);
+        let remainingSeconds = seconds % 60;
+        timeDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    }, 1000);
+
+    let startButton = document.getElementById('startButton');
+    startButton.disabled = true; 
+    startButton.style.backgroundColor = 'gray';
+    startButton.style.color = 'black';
+  }
+
+  startTimer();
+});
+
+function refreshPage() {
+  location.reload();
+}

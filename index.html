@@ -10,6 +10,75 @@
   <div class="container">
     <h1>Vocabulary Matching Game</h1>
     <p class="subtitle">Match the English words with their Turkish translations!</p>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: flex-start; 
+          align-items: flex-start; 
+          height: 100vh;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 20px; 
+      }
+
+      .container {
+          text-align: center;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      #timeDisplay {
+          font-size: 48px;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 20px;
+      }
+
+      button {
+          padding: 15px 30px;
+          font-size: 18px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 10px;
+          transition: background-color 0.3s ease, transform 0.2s;
+      }
+
+      #startStopButton {
+          background-color: #4CAF50; 
+          color: white;
+      }
+
+      #startStopButton:hover {
+          background-color: #45a049;
+          transform: scale(1.1);
+      }
+
+      #resetButton {
+          background-color: #f44336; 
+          color: white;
+      }
+
+      #resetButton:hover {
+          background-color: #e02d2d;
+          transform: scale(1.1);
+      }
+
+      button:active {
+          transform: scale(1.05);
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <div id="timeDisplay">00:00</div>
+      <button id="startButton">Başla</button>
+      <button onclick="refreshPage()">Sıfırla</button>
+  </div>
+
     <div class="levels">
   <button class="level" disabled>Level 1</button>
   <button class="level" disabled>Level 2</button>
@@ -23,7 +92,6 @@
       <span id="progress-count">0/10</span>
     </div>
     <div class="score">Score: <span id="score">0</span></div>
-    <button id="reset" onclick="resetLevel()">Reset Level</button>
     <div id="game-board" class="cards"></div>
   </div>
   <script src="script.js"></script>
