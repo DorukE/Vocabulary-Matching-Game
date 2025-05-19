@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Oyuna Giriş</title>
+  <link rel="stylesheet" href="CSS/style.css"> <!-- Mevcut stil dosyanı kullanıyoruz -->
+  <style>
+    .login-container {
+      max-width: 500px;
+      margin: 100px auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .login-container h1 {
+      color: #6a0dad;
+      margin-bottom: 10px;
+    }
+
+    .login-container p {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .login-container input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .login-container button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #6a0dad;
+      color: white;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background-color: #5a0caa;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Vocabulary Matching Game</h1>
+    <p>İngilizce kelimeleri Türkçe anlamlarıyla eşleştir, puan topla ve zamanla yarış!</p>
+<div class="game-info">
+  <p><strong style="color: #6a0dad;">English words</strong> are shown in <strong style="color: #6a0dad;">purple</strong>, and their <strong style="color: #2e8b57;">Turkish translations</strong> are shown in <strong style="color: #2e8b57;">green</strong>. Match them correctly to earn points!</p>
+  <p><strong style="color: #2e8b57;">Türkçe kelimeler</strong> <strong style="color: #2e8b57;">yeşil</strong> ile, <strong style="color: #6a0dad;">İngilizce kelimeler</strong> ise <strong style="color: #6a0dad;">mor</strong> ile gösterilir. Doğru eşleştirme yaparak puan kazan!</p>
+</div>
+
+    <input type="text" id="username" placeholder="Kullanıcı adını gir..." />
+    <br>
+    <button onclick="startGame()">Başla</button>
+    <button id="aboutBtn">Biz Kimiz??</button>
+
+<script>
+  document.getElementById("aboutBtn").addEventListener("click", function() {
+    window.location.href = "tanitim.html";
+  });
+</script>
+
+  </div>
+
+  <script>
+    function startGame() {
+      const username = document.getElementById("username").value.trim();
+      if (username === "") {
+        alert("Lütfen kullanıcı adınızı girin.");
+        return;
+      }
+
+      // Kullanıcı adını sakla (isteğe bağlı)
+      localStorage.setItem("username", username);
+
+      // Ana oyuna yönlendir
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

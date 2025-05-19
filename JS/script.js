@@ -65,6 +65,8 @@ let currentLevel = 0;
 let score = 0;
 let matched = 0;
 let firstCard = null;
+let timer;
+let seconds = 0;
 
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
@@ -137,16 +139,20 @@ function handleCardClick(card) {
     document.getElementById("progress").value = matched;
     document.getElementById("progress-count").textContent = matched + "/10";
 
-    if (matched === 10) {
-      setTimeout(() => {
-        if (currentLevel + 1 < wordPools.length) {
-          currentLevel++;
-          loadLevel(currentLevel);
-        } else {
-          alert("Tebrikler! Tüm seviyeleri bitirdiniz.");
-        }
-      }, 1000);
-    }
+if (matched === 10) {
+  // 🟢 Ses hemen çalıyor
+  if (currentLevel + 1 < wordPools.length) {
+    setTimeout(() => {
+      currentLevel++;
+      loadLevel(currentLevel);
+    }, 1000);
+  } else {
+    playCelebrationSound(); // ✅ Sesi hemen çal
+    setTimeout(() => {
+      alert("Tebrikler! Tüm seviyeleri bitirdiniz.");
+    }, 1000); // ⏳ 1 saniye sonra alert göster
+  }
+}
   } else {
     card.style.background = "#fee2e2";
     firstCard.style.background = "#fee2e2";
@@ -163,30 +169,28 @@ function resetLevel() {
   loadLevel(currentLevel);
 }
 
-window.onload = () => loadLevel(0);
+// 🟪 Süre başlatma fonksiyonu
+function startTimer() {
+  timer = setInterval(function () {
+    seconds++;
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    document.getElementById("timeDisplay").textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  }, 1000);
+}
 
-document.getElementById('startButton').addEventListener('click', function() {
-  function startTimer() {
-    let timer;
-    let seconds = 0;
-    let timeDisplay = document.getElementById('timeDisplay');
-    
-    timer = setInterval(function() {
-        seconds++;
-        let minutes = Math.floor(seconds / 60);
-        let remainingSeconds = seconds % 60;
-        timeDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-    }, 1000);
-
-    let startButton = document.getElementById('startButton');
-    startButton.disabled = true; 
-    startButton.style.backgroundColor = 'gray';
-    startButton.style.color = 'black';
-  }
-
+// ✅ Sayfa yüklenince: seviye ve süre başlasın
+window.onload = function () {
+  loadLevel(0);
   startTimer();
-});
+};
 
+// 🔁 Sıfırla butonuna bağlı
 function refreshPage() {
   location.reload();
+};
+
+function playCelebrationSound() {
+  const audio = new Audio('sesdosyasi/suprise.mp3'); 
+  audio.play();
 }
